@@ -41,6 +41,7 @@ namespace GoogleResultParser.Web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+                                app.UseExceptionHandler("/Home/Error");
             }
             else
             {

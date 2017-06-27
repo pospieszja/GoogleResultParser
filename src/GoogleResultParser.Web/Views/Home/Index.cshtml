@@ -2,32 +2,33 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model List<GoogleResultParser.Web.Models.GoogleResult>
+
 <div>
     <h1>Google Result Parser</h1>
 
-    <div class="input-group">
-        <input type="text" class="form-control" name="" value="" placeholder="enter your query">
-        <span class="input-group-btn">
-            <button type="button" class="btn btn-success">Search</button>
-        </span>
-    </div>
+    <form asp-controller="Home" asp-action="Index" method="POST" >
+        <div class="input-group">
+            <input type="text" class="form-control" name="q" value="" placeholder="enter your query">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-success">Search</button>
+            </span>
+        </div>
+    </form>    
 
-    <ul class="list-group google-results">
-        <li class="list-group-item result-item">
-            Curl
-            <span class="pull-right result-link"><a href="http://www.curl.pl">www.curl.pl</a></span>
-        </li>
-        <li class="list-group-item result-item">
-            Curl
-            <span class="pull-right result-link"><a href="http://www.curl.pl">www.curl.pl</a></span>
-        </li>
-        <li class="list-group-item result-item">
-            Curl
-            <span class="pull-right result-link"><a href="http://www.curl.pl">www.curl.pl</a></span>
-        </li>             
-        <li class="list-group-item result-item">
-            Curl
-            <span class="pull-right result-link"><a href="http://www.curl.pl">www.curl.pl</a></span>
-        </li>     
-    </ul>
+
+    @if(Model != null)
+    {
+
+        <ul class="list-group google-results">
+        @foreach (var item in Model)
+        {      
+            <li class="list-group-item result-item">
+                <strong>@item.Title</strong><br/>
+                <span class="result-link"><a href="@item.Link">@item.Link</a></span>
+            </li>
+        }
+        </ul>
+    }
+
 </div>
